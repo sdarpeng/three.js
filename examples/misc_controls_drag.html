@@ -26,6 +26,7 @@
 		<div id="info">
 			<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> webgl - drag controls<br />
 			Use "Shift+Click" to add/remove objects to/from a group.<br />
+			User "Ctrl + Click" to draw selection box.<br/>
 			Grouped objects can be transformed as a union.
 		</div>
 
@@ -198,20 +199,13 @@
 					orbitControls.enabled = true;
 					//helper.enabled = false;
 				} );
-
-
-
 				render();
-
-
-
 			}
 
 			function onWindowResize() {
 
 				camera.aspect = window.innerWidth / window.innerHeight;
 				camera.updateProjectionMatrix();
-
 				renderer.setSize( window.innerWidth, window.innerHeight );
 
 				render();
@@ -290,11 +284,12 @@
 
 			}
 
-
+			//You need to add animate loop in order to update orbitControls at each frame with dragControls.
+			//The orbitControls.update() here is essential whether damping is enabled or not.
 			function animate() {
 		                requestAnimationFrame(animate);
 		                render();
-						orbitControls.update();
+				orbitControls.update();
 		                stats.update();
 		        }
 
